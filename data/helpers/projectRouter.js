@@ -16,7 +16,7 @@ router.get('/', (req,res)=> {
         res.status(500)
         .json({error: "Could not retrieve projects"})
     })
-});
+})
 
 router.get('/:id', validateProjectId,(req, res) => {
     const id = req.params.id;
@@ -105,7 +105,6 @@ router.delete('/:id', validateProjectId, (req,res)=> {
 })
 
 //middleware
-
 function validateProjectId(req,res,next){
 
     const id = req.params.id;
