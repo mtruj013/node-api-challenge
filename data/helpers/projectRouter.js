@@ -74,11 +74,33 @@ router.post('/:id/actions', validateProjectId, validateAction,(req,res) => {
     
 })
 
-router.put('/:id', (req,res) => {
+router.put('/:id', validateProject, (req,res) => {
+    const id = req.params.id;
 
+    Projects.update(id, req.body)
+    .then(updates => {
+        res.status(200)
+        .json(updates)
+    })
+    .catch(error => {
+        res.status(500)
+        .json({error: "The project could not be updated"})
+    })
 })
 
-router.delete('/:id', (req,res)=> {
+router.delete('/:id', validateProjectId, (req,res)=> {
+
+    const id = req.params.id;
+
+    Projects.remove(id)
+    .then(() => {
+        res.status(204)
+        .json({error: "Project deleted!"})
+    })
+    .catch(error => {
+        res.status(500)
+        .json({error: "Could not delete project"})
+    })
 
 })
 
