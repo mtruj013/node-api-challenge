@@ -1,5 +1,6 @@
 const express = require('express');
 const projectRouter = require('./data/helpers/projectRouter.js');
+const actionRouter = require('./data/helpers/actionRouter.js')
 const server = express();
 
 
@@ -7,6 +8,7 @@ server.use(express.json());
 server.use(logger);
 
 server.use('/api/projects', projectRouter);
+server.use('/api/projects/:id/actions/', actionRouter);
 
 server.get("/", (req, res) => {
     res.send(`<h2>Node Sprint 1</h2>`)
